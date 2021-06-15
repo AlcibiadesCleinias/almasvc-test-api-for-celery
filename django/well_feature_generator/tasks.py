@@ -9,7 +9,7 @@ logger = get_task_logger(__name__)
 
 
 @shared_task
-def generate_well_features(computation_pk: int):
+def generate_well_features(computation_pk: int) -> int:
     logger.info(f'Start features generating with {computation_pk=}')
     with transaction.atomic():
         computation = Computation.objects.select_for_update().get(pk=computation_pk)
@@ -21,4 +21,4 @@ def generate_well_features(computation_pk: int):
         Result.objects.bulk_create(results)
         computation.save()
 
-    return computation
+    return computation.pk

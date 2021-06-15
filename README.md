@@ -64,7 +64,6 @@
 ## Schema
 ![plot](./schema.png)
 
-
 ## Api Endpoints Documentation
 Сервис, запущенный с помощью `dockerc-compose up` из данного репозитория доступен извне на `8000` порту хоста. Например, по `https://localhost:8000`.
 
