@@ -11,17 +11,6 @@ services:
       - ./django/:/usr/src/app/
     ports:
       - 8000:8000
-    environment:
-      - DEBUG=1
-      - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=*
-      - SQL_ENGINE=django.db.backends.postgresql
-      - SQL_DATABASE=hello_django_dev
-      - SQL_USER=hello_django
-      - SQL_PASSWORD=hello_django
-      - SQL_HOST=db
-      - SQL_PORT=5432
-      - DATABASE=postgres
     env_file:
       - .env.example
     depends_on:
@@ -37,3 +26,17 @@ services:
       - POSTGRES_DB=hello_django_dev
     ports:
       - 5432:5432
+
+  redis:
+    image: redis:6.0.8-alpine
+
+  celery-embed-worker:
+    build: ./django
+    command: celery -A project worker -l info
+    volumes:
+      - ./django/:/usr/src/app/
+    env_file:
+      - ./.env.example
+    depends_on:
+      - db
+      - redis

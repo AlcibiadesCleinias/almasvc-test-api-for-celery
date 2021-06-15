@@ -1,4 +1,4 @@
-FROM python:3.9.5-alpine
+FROM nickgryg/alpine-pandas:3.9.5
 
 WORKDIR /usr/src/app
 

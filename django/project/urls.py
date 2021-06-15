@@ -4,7 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('api/', include('well_feature_generator.urls', namespace='well_feature_generator')),
 ]
 
 if bool(settings.DEBUG):
